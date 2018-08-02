@@ -123,11 +123,22 @@ sudo make install
 
 The results will be located at
 
+<<<<<<< HEAD
 - `/usr/local/bin` (application binary)
 - `/usr/local/lib` (static & dynamic libraries)
 - `/usr/local/include/shairplay` (library header files)
 
 Usage<a id="usage"></a>
+=======
+### Fairplay handshake support
+
+The library has experimental support for handling fairplay handshake (used in
+for example screen mirroring) using a playfair library that is licensed under
+GPLv3. This can be enabled by adding ```--with-playfair``` to the
+```./configure``` command above.
+
+Usage
+>>>>>>> 97bbe98 (Update README to contain information about --with-playfair.)
 -----
 
 ### Running an AirPlay Server
