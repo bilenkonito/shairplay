@@ -1,3 +1,4 @@
+
 #                                               -*- Autoconf -*-
 # Process this file with autoconf to produce a configure script.
 
@@ -65,9 +66,27 @@ AM_CONDITIONAL([OS_FREEBSD], [test x"$os_freebsd" = x"yes"])
 # Custom check for libao
 PKG_CHECK_MODULES([libao], [ao >= 1.1.0], [have_libao=1], [have_libao=0])
 AM_CONDITIONAL([HAVE_LIBAO], [test "$have_libao" -eq 1])
+<<<<<<< HEAD
 AM_COND_IF(HAVE_LIBAO,
   [AC_MSG_NOTICE([libao audio library found: Building both shairplay binary and libshairplay library.])],
   [AC_MSG_WARN([libao audio library not found: Building shairplay library only.])])
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+AM_COND_IF(HAVE_LIBAO,
+  [AC_MSG_NOTICE([
+    LIBAO audio library found: Building shairplay binary and libshairplay library.])],
+  [AC_MSG_WARN([
+    LIBAO audio library not found: Building shairplay library only.
+    To install LIBAO, please refer to the "Dependencies" section in README.md.])]
+)
+=======
+=======
+AM_COND_IF(HAVE_LIBAO,
+  [AC_MSG_NOTICE([libao audio library found: Building both shairplay binary and libshairplay library.])],
+  [AC_MSG_WARN([libao audio library not found: Building shairplay library only.])])
+>>>>>>> c89ac17 (Add information about libao to the autoconf output.)
+>>>>>>> qasim-master
 
 # Optional playfair support
 AC_ARG_WITH([playfair],
@@ -77,6 +96,7 @@ AM_COND_IF([WITH_PLAYFAIR],
 	[AC_DEFINE([HAVE_FAIRPLAY], [1],
 	           [Define if you have the libdl library or equivalent.])])
 
+>>>>>>> 8a54aee (Add optional playfair library that is under GPLv3.)
 
 AC_CONFIG_FILES(
 	[Makefile]
@@ -90,3 +110,11 @@ AC_CONFIG_FILES(
 	[src/lib/playfair/Makefile]
 )
 AC_OUTPUT
+
+# XCode
+# Provides XCode with libao audio library: creates shairplay.xcconfig, then adds libao build flags
+cat > $ac_abs_confdir/shairplay.xcconfig << EOL
+XCODE_OTHER_LDFLAGS=\$(inherited) $libao_LIBS $LIBS
+XCODE_OTHER_CFLAGS=\$(inherited) $libao_CFLAGS
+EOL
+
